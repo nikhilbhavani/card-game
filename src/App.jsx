@@ -71,6 +71,7 @@ function App() {
       updatedCards.forEach(card => card.isClicked=false);
     }
     SetCards(Shuffle(updatedCards));
+  }
 
     return(
       <>
@@ -95,7 +96,6 @@ function App() {
       </main>
       </>
     )
-  }
 }
 
 export default App
