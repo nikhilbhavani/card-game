@@ -38,7 +38,7 @@ const data = [
     {
       id: 10,
       isClicked: false,
-    }
+    },
   ];
   
   export default data;

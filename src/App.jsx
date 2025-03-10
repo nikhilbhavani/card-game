@@ -2,18 +2,20 @@ import { useEffect, useState } from 'react'
 import Card from './components/card.jsx'
 import data from './data.js'
 import './App.css'
-import Shuffle from './shuffle.jsx'
+import shuffle from './shuffle.js'
 
 function App() {
-  const [score,SetScore] = useState(0);
-  const [highScore,SetHighScore] = useState(0);
-  const [cards,SetCards] = useState(data);
+  const [score,setScore] = useState(0);
+  const [highScore,setHighScore] = useState(0);
+  const [cards,setCards] = useState(data);
+
 
   useEffect(() => {
     const fetchData = async () => {
       const [names,images] = await getPokemonData();
 
-      SetCards((cards)=>{
+      
+      setCards((cards)=>{
         const updatedCards=cards.map((c)=>{
           return{...c};
         });
@@ -27,8 +29,9 @@ function App() {
     };
 
     fetchData();
-    SetCards((cards)=>Shuffle(cards));
-  },[]);
+    setCards((cards) => shuffle(cards)); 
+  }, []);
+
 
   async function getPokemonData() {
     const pokemonsList = await fetch("https://pokeapi.co/api/v2/pokemon", {mode: 'cors'});
@@ -50,7 +53,7 @@ function App() {
   }
 
   function clickHandler(card){
-    const updatedCards=card.map((c)=>{
+    const updatedCards=cards.map((c)=>{
       return{...c};
     });
 
@@ -61,16 +64,16 @@ function App() {
           break;
         }
       }
-      SetScore((score)=>score+1);
+      setScore((score)=>score+1);
     }
     else{
       if(score>highScore){
-        SetHighScore(score);
+        setHighScore(score);
       }
-      SetScore(0);
+      setScore(0);
       updatedCards.forEach(card => card.isClicked=false);
     }
-    SetCards(Shuffle(updatedCards));
+    setCards(shuffle(updatedCards));
   }
 
     return(
@@ -89,7 +92,7 @@ function App() {
         <div className="cards-container">
           {cards.map(card =>{
             return(
-              <Card clickHandler={()=>clickHandler(card)} img={card.img} name={card.name} />
+              <Card key={card.id} clickHandler={()=>clickHandler(card)} img={card.img} name={card.name} />
             )
           })}
         </div>
