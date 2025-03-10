@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Card from './components/card.jsx'
 import data from './data.js'
 import './App.css'
+import Shuffle from './shuffle.jsx'
 
 function App() {
   const [score,SetScore] = useState(0);
@@ -26,7 +27,7 @@ function App() {
     };
 
     fetchData();
-    SetCards((cards)=>shuffle(cards));
+    SetCards((cards)=>Shuffle(cards));
   },[]);
 
   async function getPokemonData() {
@@ -69,7 +70,7 @@ function App() {
       SetScore(0);
       updatedCards.forEach(card => card.isClicked=false);
     }
-    SetCards(shuffle(updatedCards));
+    SetCards(Shuffle(updatedCards));
 
     return(
       <>
