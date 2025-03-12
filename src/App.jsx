@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import Card from './components/card.jsx'
-import data from './data.js'
+import Card from './components/card'
+import data from './data'
 import './App.css'
-import shuffle from './shuffle.js'
+import shuffle from './shuffle'
 
 function App() {
   const [score,setScore] = useState(0);
